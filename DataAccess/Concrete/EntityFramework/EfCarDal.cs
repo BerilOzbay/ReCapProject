@@ -13,12 +13,18 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Car entity)
         {
-            using (Proje1Context context = new Proje1Context())
-            {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
-            }
+            
+                using (Proje1Context context = new Proje1Context())
+                {
+
+                    var addedEntity = context.Entry(entity);
+                    addedEntity.State = EntityState.Added;
+                    context.SaveChanges();
+
+                }
+            
+
+            
         }
 
         public void Delete(Car entity)
