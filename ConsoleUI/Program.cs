@@ -12,14 +12,19 @@ namespace ConsoleUI
         {
             //BrandTest();
             //ColorTest();
-            CarTest();
+            //CarTest();
+            RentalTest();
+
+            UserManager userManager = new UserManager(new EfUserDal());
+            userManager.Add(new User { UserFirstName = "Deniz",UserLastName = "Çalışkan",UserEmail ="deniz@gmail.com",UserPassword="12345"});
 
         }
+
 
         private static void ColorTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorName);
             }
@@ -28,7 +33,7 @@ namespace ConsoleUI
         private static void BrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -36,12 +41,45 @@ namespace ConsoleUI
 
         private static void CarTest()
         {
-            CarManager carManager = new CarManager(new EfCarDal());            
+            CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+
+            if (result.Success)
             {
-                Console.WriteLine(car.CarName + "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+               
+        }
+
+        private static void RentalTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            var result = rentalManager.GetAllRentalDetail();
+            if (result.Success)
+            {
+
+                foreach (var rental in result.Data)
+                {
+                    Console.WriteLine(rental.FirstName + "/" + rental.LastName + "/"
+                        + rental.CarName + "/" + rental.DailyPrice + "/"
+                        + rental.RentDate + "/" + rental.ReturnDate + "/");
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
         }
+
+
     }
 }
