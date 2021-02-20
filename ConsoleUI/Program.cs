@@ -15,8 +15,8 @@ namespace ConsoleUI
             //CarTest();
             RentalTest();
 
-            UserManager userManager = new UserManager(new EfUserDal());
-            userManager.Add(new User { UserFirstName = "Deniz",UserLastName = "Çalışkan",UserEmail ="deniz@gmail.com",UserPassword="12345"});
+            //UserManager userManager = new UserManager(new EfUserDal());
+            //userManager.Add(new User { UserFirstName = "Sule",UserLastName = "Yasar",UserEmail ="yasar@gmail.com",UserPassword="895642"});
 
         }
 
