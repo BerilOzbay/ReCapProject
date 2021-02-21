@@ -50,7 +50,9 @@ namespace Core.DataAccess.EntityFramework
         {
             using (TContext context = new TContext())
             {
-                return filter == null ? context.Set<TEntity>().ToList() : context.Set<TEntity>().Where(filter).ToList();
+                return filter == null
+                    ? context.Set<TEntity>().ToList() 
+                    : context.Set<TEntity>().Where(filter).ToList();
             }
         }
 
@@ -60,6 +62,7 @@ namespace Core.DataAccess.EntityFramework
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
 

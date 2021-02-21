@@ -22,7 +22,7 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if(car.DailyPrice>0 && car.Description.Length > 2)
+            if(car.DailyPrice<=0 && car.Description.Length <2)
             {
                 return new ErrorResult(Messages.NameInvalid);
             }
@@ -40,7 +40,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour == 16)
+            if (DateTime.Now.Hour == 2)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
